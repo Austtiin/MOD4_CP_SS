@@ -38,6 +38,8 @@ public class Main {
             @Override
             public void run() {
 
+
+
                 //start main frame of the application
                 //set to visible
                 homeFrame mainFrame = new homeFrame();
