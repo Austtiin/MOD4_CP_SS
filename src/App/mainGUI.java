@@ -12,13 +12,10 @@ public class mainGUI {
     public static void main(String[] args) {
 
         //we start the main frame of the application
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                //create the home frame and set it to visible
-                homeFrame home = new homeFrame();
-                home.setVisible(true);
-            }
+        SwingUtilities.invokeLater(() -> {
+            //create the home frame and set it to visible
+            homeFrame home = new homeFrame();
+            home.setVisible(true);
         });
     }
 }

@@ -50,36 +50,7 @@ public class homeFrame extends JFrame {
         displayArea.setFont(font);
         displayArea.setEditable(false);
 
-        JButton fileEncryptButton = new JButton("Encrypt from file");
-        fileEncryptButton.setBackground(buttonColor);
-        fileEncryptButton.setForeground(textColor);
-        fileEncryptButton.setFont(font);
-        fileEncryptButton.setFocusPainted(false);
-
-        fileEncryptButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    List<String> files = CryptoClass.listFiles();
-                    String fileName = (String) JOptionPane.showInputDialog(null, "Choose file:", "File Selection",
-                            JOptionPane.QUESTION_MESSAGE, null, files.toArray(), files.get(0));
-
-                    if (fileName != null) {
-                        String algorithm = (String) JOptionPane.showInputDialog(null, "Choose algorithm:", "Algorithm Selection",
-                                JOptionPane.QUESTION_MESSAGE, null, new String[]{"AES", "Blowfish", "ChaCha20"}, "AES");
-
-                        String newContent = JOptionPane.showInputDialog("Enter new content to encrypt:");
-
-                        if (newContent != null) {
-                            CryptoClass.updateFileWithEncryptedContent(fileName, newContent, algorithm);
-                            displayArea.setText("File " + fileName + " has been updated with encrypted content.");
-                        }
-                    }
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-                }
-            }
-        });
+        JButton fileEncryptButton = getjButton(buttonColor, textColor, font);
 
         JButton fileDecryptButton = new JButton("Decrypt from file");
         fileDecryptButton.setBackground(buttonColor);
@@ -151,4 +122,39 @@ public class homeFrame extends JFrame {
         add(panel, BorderLayout.CENTER);
         add(new JScrollPane(displayArea), BorderLayout.SOUTH);
         getContentPane().setBackground(backgroundColor);
-    }}
+    }
+
+    private JButton getjButton(Color buttonColor, Color textColor, Font font) {
+        JButton fileEncryptButton = new JButton("Encrypt from file");
+        fileEncryptButton.setBackground(buttonColor);
+        fileEncryptButton.setForeground(textColor);
+        fileEncryptButton.setFont(font);
+        fileEncryptButton.setFocusPainted(false);
+
+        fileEncryptButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    List<String> files = CryptoClass.listFiles();
+                    String fileName = (String) JOptionPane.showInputDialog(null, "Choose file:", "File Selection",
+                            JOptionPane.QUESTION_MESSAGE, null, files.toArray(), files.get(0));
+
+                    if (fileName != null) {
+                        String algorithm = (String) JOptionPane.showInputDialog(null, "Choose algorithm:", "Algorithm Selection",
+                                JOptionPane.QUESTION_MESSAGE, null, new String[]{"AES", "Blowfish", "ChaCha20"}, "AES");
+
+                        String newContent = JOptionPane.showInputDialog("Enter new content to encrypt:");
+
+                        if (newContent != null) {
+                            CryptoClass.updateFileWithEncryptedContent(fileName, newContent, algorithm);
+                            displayArea.setText("File " + fileName + " has been updated with encrypted content.");
+                        }
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+                }
+            }
+        });
+        return fileEncryptButton;
+    }
+}
