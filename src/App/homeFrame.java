@@ -28,6 +28,10 @@ public class homeFrame extends JFrame {
     public homeFrame() {
         CryptoClass crypto = new CryptoClass();
 
+
+
+        //set the title of the frame
+        //set the size of the frame
         setTitle("Encryption/Decryption");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,14 +54,18 @@ public class homeFrame extends JFrame {
         displayArea.setFont(font);
         displayArea.setEditable(false);
 
-        JButton fileEncryptButton = getjButton(buttonColor, textColor, font);
 
+        //create the buttons for the frame
+        JButton fileEncryptButton = getjButton(buttonColor, textColor, font);
         JButton fileDecryptButton = new JButton("Decrypt from file");
         fileDecryptButton.setBackground(buttonColor);
         fileDecryptButton.setForeground(textColor);
         fileDecryptButton.setFont(font);
         fileDecryptButton.setFocusPainted(false);
 
+
+
+        ///This is the action listener for the file decrypt button
         fileDecryptButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -79,12 +87,16 @@ public class homeFrame extends JFrame {
             }
         });
 
+
+
+        //create the input button
         JButton inputButton = new JButton("Encrypt/Decrypt from keyboard input");
         inputButton.setBackground(buttonColor);
         inputButton.setForeground(textColor);
         inputButton.setFont(font);
         inputButton.setFocusPainted(false);
 
+        //This is the action listener for the input button
         inputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -101,6 +113,10 @@ public class homeFrame extends JFrame {
             }
         });
 
+
+
+        //create the exit button
+        //This button will exit the application
         JButton exitButton = new JButton("Exit");
         exitButton.setBackground(buttonColor);
         exitButton.setForeground(textColor);
@@ -114,6 +130,8 @@ public class homeFrame extends JFrame {
             }
         });
 
+
+        //add the buttons to the panel
         panel.add(fileEncryptButton);
         panel.add(fileDecryptButton);
         panel.add(inputButton);
@@ -124,6 +142,9 @@ public class homeFrame extends JFrame {
         getContentPane().setBackground(backgroundColor);
     }
 
+
+
+    //This method will create a button with the given color, text color, and font
     private JButton getjButton(Color buttonColor, Color textColor, Font font) {
         JButton fileEncryptButton = new JButton("Encrypt from file");
         fileEncryptButton.setBackground(buttonColor);
@@ -131,6 +152,7 @@ public class homeFrame extends JFrame {
         fileEncryptButton.setFont(font);
         fileEncryptButton.setFocusPainted(false);
 
+        //This is the action listener for the file encrypt button
         fileEncryptButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

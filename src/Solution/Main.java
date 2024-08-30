@@ -25,9 +25,7 @@ Your Java program must include the points above, and include zero syntax or runt
 */
 
 
-//This week we will be adding the ability to encrypt and decrypt using the AES and Blowfish algorithms
-//We also transfered our application to be GUI based for a better user experience
-//main area of program to start. This will also run the main frame of the application
+//THis week we will be adding the ChaCha encryption algorithm to our program
 package Solution;
 import App.homeFrame;
 import javax.swing.*;
