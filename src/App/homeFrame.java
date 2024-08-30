@@ -2,6 +2,10 @@
 //This is the main home frame of the application
 
 //This is more of the GUI side of the application and is where the user will interact with the application
+//homeFrame.java
+//This is the main home frame of the application
+
+//This is more of the GUI side of the application and is where the user will interact with the application
 package App;
 
 import Solution.CryptoClass;
@@ -12,10 +16,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+//This is the main home frame of the application
 public class homeFrame extends JFrame {
 
+
+    //final JTextArea to display the output
     private final JTextArea displayArea;
 
+
+    //This is the main constructor for the home frame
     public homeFrame() {
         CryptoClass crypto = new CryptoClass();
 
@@ -142,5 +151,4 @@ public class homeFrame extends JFrame {
         add(panel, BorderLayout.CENTER);
         add(new JScrollPane(displayArea), BorderLayout.SOUTH);
         getContentPane().setBackground(backgroundColor);
-    }
-}
+    }}

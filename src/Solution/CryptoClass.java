@@ -20,26 +20,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
-
 public class CryptoClass {
 
-
-    //Keys and algorithms for encryption
+    // Keys and algorithms for encryption
     private static final String AES_ALGORITHM = "AES";
     private static final String BLOWFISH_ALGORITHM = "Blowfish";
     private static final String CHACHA_ALGORITHM = "ChaCha20";
     private static final byte[] AES_KEY = "PROFESSORZayass!".getBytes();
     private static final byte[] BLOWFISH_KEY = "ZayazzKey1234".getBytes();
-    private static final byte[] CHACHA_KEY = "ZayazzKey1234ZayazzKey1234ZayazzKey12".getBytes();
-    private static final byte[] CHACHA_NONCE = "123456789012".getBytes();
-//Data folder for the files
+    private static final byte[] CHACHA_KEY = "ZayazzKey1234ZayazzKey1234Zayazz".getBytes(); // 32-byte key for ChaCha20
+    private static final byte[] CHACHA_NONCE = "123456789012".getBytes(); // 12-byte nonce for ChaCha20
+
+    // Folder where data files are stored
     private static final String DATA_FOLDER = "src/data";
 
 
-
-    //Process file method
-    //This will take in a file name and an algorithm
+    //This method will process the file and encrypt and decrypt the content
+    //It will take in the file name and the algorithm to use
     public static void processFile(String fileName, String algorithm) throws Exception {
         String filePath = Paths.get(DATA_FOLDER, fileName).toString();
         String content = new String(Files.readAllBytes(Paths.get(filePath)));
@@ -53,8 +50,9 @@ public class CryptoClass {
     }
 
 
-    //Process input method
-    //This will take in a string input and an algorithm
+
+    //This method will process the input and encrypt and decrypt the content
+    //It will take in the input and the algorithm to use
     public void processInput(String input, String algorithm) throws Exception {
         String validatedInput = validateInput(input);
 
@@ -67,16 +65,15 @@ public class CryptoClass {
     }
 
 
-    //List files method
-    //This will list all the files in the data folder
 
-    //throws exception if there is an error
+    //This method will list the files in the data folder
+    //It will return a list of the files
     public static List<String> listFiles() throws Exception {
         try (Stream<Path> paths = Files.walk(Paths.get(DATA_FOLDER))) {
             return paths.filter(Files::isRegularFile)
                     .map(Path::getFileName)
                     .map(Path::toString)
-                    .peek(System.out::println) // Log the file names
+                    .peek(System.out::println)
                     .collect(Collectors.toList());
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -85,8 +82,8 @@ public class CryptoClass {
     }
 
 
-    //Update file with encrypted content method
-    //This will take in a file name, new content, and an algorithm
+    //This method will update the file with the encrypted content
+    //It will take in the file name, the new content, and the algorithm to use
     public static void updateFileWithEncryptedContent(String fileName, String newContent, String algorithm) throws Exception {
         String filePath = Paths.get(DATA_FOLDER, fileName).toString();
         String validatedContent = validateInput(newContent);
@@ -97,8 +94,8 @@ public class CryptoClass {
     }
 
 
-    //Update file with decrypted content method
-    //This will take in a file name and an algorithm
+    //This method will update the file with the decrypted content
+    //It will take in the file name and the algorithm to use
     public static void updateFileWithDecryptedContent(String fileName, String algorithm) throws Exception {
         String filePath = Paths.get(DATA_FOLDER, fileName).toString();
         String content = new String(Files.readAllBytes(Paths.get(filePath)));
@@ -106,8 +103,9 @@ public class CryptoClass {
         Files.write(Paths.get(filePath), decrypted.getBytes());
     }
 
-    //Encrypt method
-    //This will take in a string data and an algorithm
+
+    //This method will encrypt the input
+    //It will take in the data and the algorithm to use
     private static String encrypt(String data, String algorithm) {
         try {
             Cipher cipher;
@@ -132,12 +130,14 @@ public class CryptoClass {
     }
 
 
-    //Decrypt method
-    //This will take in a string data and an algorithm
+    //This method will decrypt the input
+    //It will take in the data and the algorithm to use
     private static String decrypt(String data, String algorithm) {
         try {
             Cipher cipher;
             byte[] key;
+
+//********added ChaCha20 algorithm here, just did if else statement to check if the algorithm is ChaCha20
 
             if (algorithm.equals(CHACHA_ALGORITHM)) {
                 cipher = Cipher.getInstance("ChaCha20");
@@ -158,8 +158,8 @@ public class CryptoClass {
     }
 
 
-    //Validate input method
-    //This will take in a string input and return a validated string
+    //This method will validate the input
+    //It will take in the input and return the validated input
     private static String validateInput(String input) {
         return input.replaceAll("[^a-zA-Z0-9\\p{Punct}]", "");
     }
